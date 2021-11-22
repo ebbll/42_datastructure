@@ -61,8 +61,7 @@ int isArrayStackFull(ArrayStack* pStack)
 		return (-1);
 	if (pStack->currentElementCount == pStack->maxElementCount)
 		return (TRUE);
-	else
-		return (FALSE);
+	return (FALSE);
 }
 
 int isArrayStackEmpty(ArrayStack* pStack)
@@ -71,8 +70,7 @@ int isArrayStackEmpty(ArrayStack* pStack)
 		return (-1);
 	if (pStack->currentElementCount == 0)
 		return (TRUE);
-	else
-		return (FALSE);
+	return (FALSE);
 }
 
 int checkBracketMatching(char *pSource)
