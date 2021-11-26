@@ -1,64 +1,67 @@
 #include "arraystack.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 ArrayStack* createArrayStack(int maxElementCount)
 {
 	ArrayStack *pStack;
-	StackNode *pNode;
+	ArrayStackNode *pElement;
 
 	if (maxElementCount < 0)
+		return (NULL);
 	pStack = (ArrayStack *)malloc(sizeof(ArrayStack));
 	if (pStack == NULL)
 		return (NULL);
-	pStack->pTopElement = (StackNode *)malloc(sizeof(StackNode) * maxElementCount);
-	if (pStack->pTopElement == NULL)
+	pStack->pElement = (ArrayStackNode *)malloc(sizeof(ArrayStackNode) * maxElementCount);
+	if (pStack->pElement == NULL)
 		return (NULL);
-	pStack->currentElementCount = 0;
 	pStack->maxElementCount = maxElementCount;
+	pStack->currentElementCount = 0;
 	return (pStack);
 }
 
-int pushAS(ArrayStack* pStack, StackNode element)
+int pushAS(ArrayStack* pStack, ArrayStackNode element)
 {
 	if (pStack == NULL)
 		return (FALSE);
-	if (pStack->currentElementCount == pStack->maxElementCount)
+	if (isArrayStackFull(pStack))
 		return (FALSE);
-	pStack->pTopElement[pStack->currentElementCount].data = element.data;
+	pStack->pElement[pStack->currentElementCount].data = element.data;
 	pStack->currentElementCount++;
+	return (TRUE);
 }
 
-StackNode* popAS(ArrayStack* pStack)
+ArrayStackNode* popAS(ArrayStack* pStack)
 {
-	StackNode *ret;
+	ArrayStackNode *ret;
 
 	if (pStack == NULL)
 		return (NULL);
-	if (pStack->currentElementCount == 0)
+	if (isArrayStackEmpty(pStack))
 		return (NULL);
 	pStack->currentElementCount--;
-	return (&pStack->pTopElement[pStack->currentElementCount - 1]);
+	return (&pStack->pElement[pStack->currentElementCount]);
 }
 
-StackNode* peekAS(ArrayStack* pStack)
+ArrayStackNode* peekAS(ArrayStack* pStack)
 {
 	if (pStack == NULL)
 		return (NULL);
-	if (pStack->currentElementCount == 0)
+	if (isArrayStackEmpty(pStack))
 		return (NULL);
-	return (&pStack->pTopElement[pStack->currentElementCount - 1]);
+	return (&pStack->pElement[pStack->currentElementCount - 1]);
 }
 
 void deleteArrayStack(ArrayStack* pStack)
 {
-	free(pStack->pTopElement);
+	free(pStack->pElement);
 	free(pStack);
 }
 
 int isArrayStackFull(ArrayStack* pStack)
 {
 	if (pStack == NULL)
-		return (-1);
+		return (FALSE);
 	if (pStack->currentElementCount == pStack->maxElementCount)
 		return (TRUE);
 	return (FALSE);
@@ -67,62 +70,68 @@ int isArrayStackFull(ArrayStack* pStack)
 int isArrayStackEmpty(ArrayStack* pStack)
 {
 	if (pStack == NULL)
-		return (-1);
+		return (FALSE);
 	if (pStack->currentElementCount == 0)
 		return (TRUE);
 	return (FALSE);
 }
 
-int checkBracketMatching(char *pSource)
+void displayArrayStack(ArrayStack* pStack)
 {
-	ArrayStack *pStack;
-	StackNode *node;
-	int ret;
-
-	pStack = createArrayStack(100);
-	while (*pSource != '\0')
+	if (pStack == NULL)
 	{
-		if (*pSource == '{' || *pSource == '[' || *pSource == '(' || *pSource == '<')
-		{
-			node = createArrayStack((int)*pSource);
-			pushAS(pStack, *node);
-			free(node);
-		}
-		else if (*pSource == '}')
-		{
-			if (popAS(pStack)->data != '{')
-				return (FALSE);
-		}
-		else if (*pSource == ']')
-		{
-			if (popAS(pStack)->data != '[')
-				return (FALSE);
-		}
-		else if (*pSource == ')')
-		{
-			if (popAS(pStack)->data != '(')
-				return (FALSE);
-		}
-		else if (*pSource == '>')
-		{
-			if (popAS(pStack)->data != '<')
-				return (FALSE);
-		}
-		pSource++;
+		printf("Stack pointer doesn't exist\n\n");
+		return ;
 	}
-	if (isArrayStackEmpty(pStack))
-		ret = TRUE;
-	else
-		ret = FALSE;
-	deleteArrayStack(pStack);
-	return (ret);
+	if (pStack->currentElementCount == 0)
+	{
+		printf("No elements in stack\n\n");
+		return ;
+	}
+	printf("=====STACK=====\n");
+	printf("Stack size : %d\n", pStack->currentElementCount);
+	for (int i = pStack->currentElementCount - 1; i >= 0; i--)
+	{
+		printf("[%d] : %d\n", pStack->currentElementCount - i - 1, pStack->pElement[i].data);
+	}
+	printf("===============\n\n");
 }
 
-StackNode	*createArrayNode(int data)
+int	main(void)
 {
-	StackNode *node;
+	ArrayStack *pStack;
+	ArrayStackNode new;
+	ArrayStackNode *temp;
 
-	node = (StackNode *)malloc(sizeof(StackNode));
-	node->data = data;
-	return (node);
+	pStack = createArrayStack(3);
+
+	printf("EMPTY? : %d\n\n", isArrayStackEmpty(pStack));
+
+	new.data = 0;
+	pushAS(pStack, new);
+	new.data = 1;
+	pushAS(pStack, new);
+	new.data = 2;
+	pushAS(pStack, new);
+	displayArrayStack(pStack);
+
+	printf("FULL? : %d\n\n", isArrayStackFull(pStack));
+
+	new.data = 3;
+	pushAS(pStack, new);
+	displayArrayStack(pStack);
+
+	temp = popAS(pStack);
+	printf("POP : %d\n", temp->data);
+	temp = peekAS(pStack);
+	printf("PEEK : %d\n", temp->data);
+	displayArrayStack(pStack);
+
+	popAS(pStack);
+	popAS(pStack);
+	displayArrayStack(pStack);
+
+	printf("EMPTY? : %d\n\n", isArrayStackEmpty(pStack));
+
+	popAS(pStack);
 }

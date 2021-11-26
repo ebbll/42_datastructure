@@ -1,5 +1,6 @@
 #include "linkedstack.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 LinkedStack* createLinkedStack()
 {
@@ -13,8 +14,7 @@ LinkedStack* createLinkedStack()
 	if (pStack->pTopElement == NULL)
 		return (NULL);
 	pStack->pTopElement->data = 0;
-	pStack->pTopElement->pLLink = NULL;
-	pStack->pTopElement->pRLink = NULL;
+	pStack->pTopElement->pLink = NULL;
 	return (pStack);
 }
 
@@ -28,31 +28,26 @@ int pushLS(LinkedStack* pStack, StackNode element)
 	new = (StackNode *)malloc(sizeof(StackNode));
 	if (new == NULL)
 		return (FALSE);
-	head = pStack->pTopElement->pRLink;
-	new->pLLink = NULL;
-	new->pRLink = head;
-	head->pLLink = new;
-	pStack->pTopElement = new;
+	new->data = element.data;
+	new->pLink = pStack->pTopElement->pLink;
+	pStack->pTopElement->pLink = new;
 	pStack->currentElementCount++;
 	return (TRUE);
 }
 
 StackNode* popLS(LinkedStack* pStack)
 {
-	//pop 결과는 탑 포인터인데, 그럼 프리는 언제 해??
+	//pop 결과는 스택노드의 포인터인데, 그럼 프리는 언제 해??
 	StackNode *ret;
 	StackNode *next;
 
 	if (pStack == NULL)
 		return (NULL);
-	if (pStack->currentElementCount == 0)
+	if (isLinkedStackEmpty(pStack))
 		return (NULL);
-	ret = pStack->pTopElement->pRLink;
-	next = ret->pRLink;
-	ret->pRLink->pLLink = NULL;
-	ret->pLLink = NULL;
-	ret->pRLink = NULL;
-	pStack->pTopElement = next;
+	ret = pStack->pTopElement->pLink;
+	next = ret->pLink;
+	pStack->pTopElement->pLink = next;
 	pStack->currentElementCount--;
 	return (ret);
 }
@@ -61,9 +56,9 @@ StackNode* peekLS(LinkedStack* pStack)
 {
 	if (pStack == NULL)
 		return (NULL);
-	if (pStack->currentElementCount == 0)
+	if (isLinkedStackEmpty(pStack))
 		return (NULL);
-	return (pStack->pTopElement->pRLink);
+	return (pStack->pTopElement->pLink);
 }
 
 void deleteLinkedStack(LinkedStack* pStack)
@@ -80,6 +75,13 @@ void deleteLinkedStack(LinkedStack* pStack)
 	free(pStack);
 }
 
+/*
+int isLinkedStackFull(LinkedStack* pStack)
+{
+	// linkedstack이 full일 수 있나??
+}
+*/
+
 int isLinkedStackEmpty(LinkedStack* pStack)
 {
 	if (pStack == NULL)
@@ -89,80 +91,62 @@ int isLinkedStackEmpty(LinkedStack* pStack)
 	return (FALSE);
 }
 
-int checkBracketMatching(char *pSource)
+void displayLinkedStack(LinkedStack *pStack)
 {
-	LinkedStack *pStack;
-	StackNode *new;
-	StackNode *pop;
-	int ret;
+	StackNode *node;
 
-	pStack = createLinkedStack();
 	if (pStack == NULL)
-		return (FALSE);
-	while (*pSource != '\0')
 	{
-		if (*pSource == '{' || *pSource == '[' || *pSource == '(' || *pSource == '<')
-		{
-			new = createLinkedNode((int)*pSource);
-			pushLS(pStack, *new);
-		}
-		else if (*pSource == '}')
-		{
-			pop = popLS(pStack);
-			if (pop->data != '{')
-			{
-				free(pop);
-				deleteLinkedStack(pStack);
-				return (FALSE);
-			}
-		}
-		else if (*pSource == ']')
-		{
-			pop = popLS(pStack);
-			if (pop->data != '[')
-			{
-				free(pop);
-				deleteLinkedStack(pStack);
-				return (FALSE);
-			}
-		}
-		else if (*pSource == ')')
-		{
-			pop = popLS(pStack);
-			if (pop->data != '(')
-			{
-				free(pop);
-				deleteLinkedStack(pStack);
-				return (FALSE);
-			}
-		}
-		else if (*pSource == '>')
-		{
-			pop = popLS(pStack);
-			if (pop->data != '<')
-			{
-				free(pop);
-				deleteLinkedStack(pStack);
-				return (FALSE);
-			}
-		}
-		pSource++;
+		printf("Stack pointer doesn't exist\n\n");
+		return ;
 	}
 	if (pStack->currentElementCount == 0)
-		ret = TRUE;
-	else
-		ret = FALSE;
-	deleteLinkedStack(pStack);
-	return (ret);
+	{
+		printf("No elements in stack\n\n");
+		return ;
+	}
+	printf("=====STACK=====\n");
+	printf("Stack size : %d\n", pStack->currentElementCount);
+	node = peekLS(pStack);
+	for (int i = 0; i < pStack->currentElementCount; i++)
+	{
+		printf("[%d] : %d\n", i, node->data);
+		node = node->pLink;
+	}
+	printf("===============\n\n");
 }
 
-StackNode	*createLinkedNode(int data)
+int main(void)
 {
-	StackNode *new;
+	LinkedStack *pStack;
+	StackNode new;
+	StackNode *temp;
 
-	new = (StackNode *)malloc(sizeof(StackNode));
-	new->data = data;
-	new->pLLink = NULL;
-	new->pRLink = NULL;
-	return (new);
+	pStack = createLinkedStack();
+
+	printf("EMPTY? : %d\n\n", isLinkedStackEmpty(pStack));
+
+	new.data = 0;
+	pushLS(pStack, new);
+	new.data = 1;
+	pushLS(pStack, new);
+	new.data = 2;
+	pushLS(pStack, new);
+	displayLinkedStack(pStack);
+
+	temp = popLS(pStack);
+	printf("pop : %d\n", temp->data);
+	free(temp);
+	temp = peekLS(pStack);
+	printf("peek : %d\n", temp->data);
+	displayLinkedStack(pStack);
+
+	popLS(pStack);
+	popLS(pStack);
+	displayLinkedStack(pStack);
+
+	printf("EMPTY? : %d\n\n", isLinkedStackEmpty(pStack));
+
+	popLS(pStack);
+
 }
