@@ -58,7 +58,6 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 
 int removeLLElement(LinkedList* pList, int position)
 {
-
 	ListNode	*prev;
 	ListNode	*now;
 
