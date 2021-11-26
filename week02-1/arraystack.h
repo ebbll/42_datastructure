@@ -1,27 +1,28 @@
-#ifndef _STACK_
-#define _STACK_
+#ifndef _ARRAY_STACK_
+#define _ARRAY_STACK_
 
-typedef struct StackNodeType
-{
-	int data;
-}	StackNode;
+typedef struct ArrayStackNodeType {
+	char data;
+} ArrayStackNode;
 
-typedef struct ArrayStackType
-{
-	int maxElementCount;		// ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	int currentElementCount;	// í˜„ì¬ ì›ì†Œì˜ ê°œìˆ˜
-	StackNode* pTopElement;		// Top ë…¸ë“œì˜ í¬ì¸í„°
-}	ArrayStack;
+typedef struct ArrayStackType {
+	int maxElementCount;		// ÃÖ´ë ¿ø¼Ò °³¼ö
+	int currentElementCount;	// ÇöÀç ¿ø¼ÒÀÇ °³¼ö
+	ArrayStackNode *pElement;	// ³ëµå ÀúÀåÀ» À§ÇÑ 1Â÷¿ø array
+} ArrayStack;
 
 ArrayStack* createArrayStack(int maxElementCount);
-int pushAS(ArrayStack* pStack, StackNode element);
-StackNode* popAS(ArrayStack* pStack);
-StackNode* peekAS(ArrayStack* pStack);
+int pushAS(ArrayStack* pStack, ArrayStackNode element);
+ArrayStackNode* popAS(ArrayStack* pStack);
+ArrayStackNode* peekAS(ArrayStack* pStack);
 void deleteArrayStack(ArrayStack* pStack);
 int isArrayStackFull(ArrayStack* pStack);
 int isArrayStackEmpty(ArrayStack* pStack);
-int checkBracketMatching(char *pSource);
-StackNode	*createArrayNode(int data);
+
+#endif
+
+#ifndef _COMMON_STACK_DEF_
+#define _COMMON_STACK_DEF_
 
 #define TRUE		1
 #define FALSE		0

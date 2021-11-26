@@ -1,17 +1,16 @@
-#ifndef _STACK_
-#define _STACK_
+#ifndef _LINKED_STACK_
+#define _LINKED_STACK_
 
 typedef struct StackNodeType
 {
-	int data;
-	struct StackNodeType* pLLink;
-	struct StackNodeType* pRLink;
-}	StackNode;
+	char data;
+	struct StackNodeType* pLink;
+} StackNode;
 
 typedef struct LinkedStackType
 {
-	int currentElementCount;	// í˜„ì¬ ì›ì†Œì˜ ê°œìˆ˜
-	StackNode* pTopElement;		// Top ë…¸ë“œì˜ í¬ì¸í„°
+	int currentElementCount;	// ÇöÀç ¿ø¼ÒÀÇ °³¼ö
+	StackNode* pTopElement;		// Top ³ëµåÀÇ Æ÷ÀÎÅÍ
 } LinkedStack;
 
 LinkedStack* createLinkedStack();
@@ -19,9 +18,13 @@ int pushLS(LinkedStack* pStack, StackNode element);
 StackNode* popLS(LinkedStack* pStack);
 StackNode* peekLS(LinkedStack* pStack);
 void deleteLinkedStack(LinkedStack* pStack);
+int isLinkedStackFull(LinkedStack* pStack);
 int isLinkedStackEmpty(LinkedStack* pStack);
-int checkBracketMatching(char *pSource);
-StackNode	*createLinkedNode(int data);
+
+#endif
+
+#ifndef _COMMON_STACK_DEF_
+#define _COMMON_STACK_DEF_
 
 #define TRUE		1
 #define FALSE		0
