@@ -7,7 +7,7 @@ ArrayStack* createArrayStack(int maxElementCount)
 	ArrayStack *pStack;
 	ArrayStackNode *pElement;
 
-	if (maxElementCount < 0)
+	if (maxElementCount <= 0)
 		return (NULL);
 	pStack = (ArrayStack *)malloc(sizeof(ArrayStack));
 	if (pStack == NULL)
