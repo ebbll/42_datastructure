@@ -39,15 +39,13 @@ StackNode* popLS(LinkedStack* pStack)
 {
 	//pop 결과는 스택노드의 포인터인데, 그럼 프리는 언제 해??
 	StackNode *ret;
-	StackNode *next;
 
 	if (pStack == NULL)
 		return (NULL);
 	if (isLinkedStackEmpty(pStack))
 		return (NULL);
 	ret = pStack->pTopElement->pLink;
-	next = ret->pLink;
-	pStack->pTopElement->pLink = next;
+	pStack->pTopElement->pLink = ret->pLink;
 	pStack->currentElementCount--;
 	return (ret);
 }
@@ -72,6 +70,7 @@ void deleteLinkedStack(LinkedStack* pStack)
 		temp = popLS(pStack);
 		free(temp);
 	}
+	free(pStack->pTopElement);
 	free(pStack);
 }
 

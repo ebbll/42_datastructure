@@ -40,7 +40,7 @@ ArrayStackNode* popAS(ArrayStack* pStack)
 	if (isArrayStackEmpty(pStack))
 		return (NULL);
 	pStack->currentElementCount--;
-	return (&pStack->pElement[pStack->currentElementCount]);
+	return (&(pStack->pElement[pStack->currentElementCount]));
 }
 
 ArrayStackNode* peekAS(ArrayStack* pStack)
@@ -49,7 +49,7 @@ ArrayStackNode* peekAS(ArrayStack* pStack)
 		return (NULL);
 	if (isArrayStackEmpty(pStack))
 		return (NULL);
-	return (&pStack->pElement[pStack->currentElementCount - 1]);
+	return (&(pStack->pElement[pStack->currentElementCount - 1]));
 }
 
 void deleteArrayStack(ArrayStack* pStack)
