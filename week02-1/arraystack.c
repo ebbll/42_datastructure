@@ -135,5 +135,7 @@ int	main(void)
 
 	popAS(pStack);
 
+	deleteArrayStack(pStack);
+
 	return (0);
 }

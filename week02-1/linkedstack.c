@@ -148,5 +148,7 @@ int main(void)
 
 	popLS(pStack);
 
+	deleteLinkedStack(pStack);
+
 	return (0);
 }
