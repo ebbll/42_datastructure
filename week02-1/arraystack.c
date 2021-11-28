@@ -92,7 +92,7 @@ void displayArrayStack(ArrayStack* pStack)
 	printf("Stack size : %d\n", pStack->currentElementCount);
 	for (int i = pStack->currentElementCount - 1; i >= 0; i--)
 	{
-		printf("[%d] : %d\n", pStack->currentElementCount - i - 1, pStack->pElement[i].data);
+		printf("[%d] : %d\n", pStack->currentElementCount - i - 1, (int)pStack->pElement[i].data);
 	}
 	printf("===============\n\n");
 }
@@ -122,9 +122,9 @@ int	main(void)
 	displayArrayStack(pStack);
 
 	temp = popAS(pStack);
-	printf("POP : %d\n", temp->data);
+	printf("POP : %d\n", (int)temp->data);
 	temp = peekAS(pStack);
-	printf("PEEK : %d\n", temp->data);
+	printf("PEEK : %d\n", (int)temp->data);
 	displayArrayStack(pStack);
 
 	popAS(pStack);

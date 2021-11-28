@@ -109,7 +109,7 @@ void displayLinkedStack(LinkedStack *pStack)
 	node = peekLS(pStack);
 	for (int i = 0; i < pStack->currentElementCount; i++)
 	{
-		printf("[%d] : %d\n", i, node->data);
+		printf("[%d] : %d\n", i, (int)node->data);
 		node = node->pLink;
 	}
 	printf("===============\n\n");
@@ -134,10 +134,10 @@ int main(void)
 	displayLinkedStack(pStack);
 
 	temp = popLS(pStack);
-	printf("pop : %d\n", temp->data);
+	printf("pop : %d\n", (int)temp->data);
 	free(temp);
 	temp = peekLS(pStack);
-	printf("peek : %d\n", temp->data);
+	printf("peek : %d\n", (int)temp->data);
 	displayLinkedStack(pStack);
 
 	popLS(pStack);

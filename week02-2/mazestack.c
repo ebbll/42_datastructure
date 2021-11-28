@@ -1,0 +1,1 @@
+#include "../week02-1/linkedstack.h"
