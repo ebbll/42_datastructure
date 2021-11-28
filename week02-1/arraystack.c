@@ -1,6 +1,4 @@
 #include "arraystack.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 ArrayStack* createArrayStack(int maxElementCount)
 {
@@ -97,6 +95,7 @@ void displayArrayStack(ArrayStack* pStack)
 	printf("===============\n\n");
 }
 
+/*
 int	main(void)
 {
 	ArrayStack *pStack;
@@ -139,3 +138,4 @@ int	main(void)
 
 	return (0);
 }
+*/

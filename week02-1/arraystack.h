@@ -1,14 +1,17 @@
 #ifndef _ARRAY_STACK_
 #define _ARRAY_STACK_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct ArrayStackNodeType {
 	char data;
 } ArrayStackNode;
 
 typedef struct ArrayStackType {
-	int maxElementCount;		// �ִ� ���� ����
-	int currentElementCount;	// ���� ������ ����
-	ArrayStackNode *pElement;	// ��� ������ ���� 1���� array
+	int maxElementCount;
+	int currentElementCount;
+	ArrayStackNode *pElement;
 } ArrayStack;
 
 ArrayStack* createArrayStack(int maxElementCount);

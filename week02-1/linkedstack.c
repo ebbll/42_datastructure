@@ -1,6 +1,4 @@
 #include "linkedstack.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 LinkedStack* createLinkedStack()
 {
@@ -115,6 +113,7 @@ void displayLinkedStack(LinkedStack *pStack)
 	printf("===============\n\n");
 }
 
+/*
 int main(void)
 {
 	LinkedStack *pStack;
@@ -152,3 +151,4 @@ int main(void)
 
 	return (0);
 }
+*/

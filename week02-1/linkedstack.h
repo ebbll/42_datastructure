@@ -1,6 +1,9 @@
 #ifndef _LINKED_STACK_
 #define _LINKED_STACK_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct StackNodeType
 {
 	char data;
@@ -9,8 +12,8 @@ typedef struct StackNodeType
 
 typedef struct LinkedStackType
 {
-	int currentElementCount;	// ���� ������ ����
-	StackNode* pTopElement;		// Top ����� ������
+	int currentElementCount;
+	StackNode* pTopElement;
 } LinkedStack;
 
 LinkedStack* createLinkedStack();
