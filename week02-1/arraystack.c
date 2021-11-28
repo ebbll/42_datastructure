@@ -134,4 +134,6 @@ int	main(void)
 	printf("EMPTY? : %d\n\n", isArrayStackEmpty(pStack));
 
 	popAS(pStack);
+
+	return (0);
 }
