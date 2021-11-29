@@ -12,7 +12,10 @@ ArrayStack* createArrayStack(int maxElementCount)
 		return (NULL);
 	pStack->pElement = (ArrayStackNode *)malloc(sizeof(ArrayStackNode) * maxElementCount);
 	if (pStack->pElement == NULL)
+	{
+		free(pStack);
 		return (NULL);
+	}
 	pStack->maxElementCount = maxElementCount;
 	pStack->currentElementCount = 0;
 	return (pStack);

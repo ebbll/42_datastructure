@@ -1,16 +1,19 @@
 #include "../week02-1/linkedstack.h"
 #include "mazestack.h"
 
+void go(int maze[8][8], int xpoint, int ypoint, int out[2], LinkedStack *pStack)
+{
 
+}
 
 void findPath(int maze[8][8], int entry[2], int out[2], LinkedStack *pStack)
 {
 	StackNode node;
-	int x, y;
+	int point[2] = {entry[0], entry[1]};
 
 	node.data = entry[0] * 8 + entry[1];
 	maze[entry[0]][entry[1]] = 2;
-	pushLS(pStack, node);
+	go(maze[8][8], point, out, pStack);
 
 }
 
