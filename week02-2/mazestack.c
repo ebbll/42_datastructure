@@ -3,18 +3,21 @@
 
 void go(int maze[8][8], int xpoint, int ypoint, int out[2], LinkedStack *pStack)
 {
-
+	if (xpoint < 0 || ypoint < 0 || xpoint >= 8 || ypoint >= 8)
+		return ;
+	
 }
 
 void findPath(int maze[8][8], int entry[2], int out[2], LinkedStack *pStack)
 {
 	StackNode node;
-	int point[2] = {entry[0], entry[1]};
 
 	node.data = entry[0] * 8 + entry[1];
 	maze[entry[0]][entry[1]] = 2;
-	go(maze[8][8], point, out, pStack);
-
+	go(maze[8][8], entry[0] - 1, entry[1], out, pStack);
+	go(maze[8][8], entry[0], entry[1] + 1, out, pStack);
+	go(maze[8][8], entry[0] + 1, entry[1], out, pStack);
+	go(maze[8][8], entry[0], entry[1] - 1, out, pStack);
 }
 
 void printSolution(int maze[8][8], LinkedStack *pStack)

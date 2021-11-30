@@ -18,7 +18,6 @@ LinkedStack* createLinkedStack()
 
 int pushLS(LinkedStack* pStack, StackNode element)
 {
-	StackNode *head;
 	StackNode *new;
 
 	if (pStack == NULL)
