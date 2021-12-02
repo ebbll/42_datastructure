@@ -1,66 +1,46 @@
 #include "linkedstack.h"
 #include <stdio.h>
 
-static int dx[4] = {1, 0, -1, 0};
-static int dy[4] = {0, 1, 0, -1};
+#define EMPTY 0
+#define WALL 1
+#define VISITED 2
 
-extern int g_map[HEIGHT][WIDTH];
+int direction[4][2] = {
+	{1, 0},
+	{0, 1},
+	{0, -1},
+	{-1, 0}
+};
 
-void	printMap(void)
+extern int MAZE[HEIGHT][WIDTH];
+
+int check(t_pos current, t_pos end)
 {
-	printf("================\n");
-	for (int i = 0; i < HEIGHT; i++)
-	{
-		for (int j = 0; j < WIDTH; j++)
-		{
-			printf("%d ", g_map[i][j]);
-		}
-		printf("\n");
-	}
-	printf("===============\n");
+	return (current.x == end.x && current.y == end.y);
 }
 
-static	int		poscmp(const t_pos a, const t_pos b)
-{
-	if (a.x == b.x && a.y == b.y)
-		return (TRUE);
-	return (FALSE);
-}
-
-static	int		pos_in_map(const t_pos pos)
-{
-	if ((pos.x >= 0 && pos.x < HEIGHT) && (pos.y >= 0 && pos.y < WIDTH))
-		return (TRUE);
-	return (FALSE);
-}
-
-int		findPath(const t_pos currPos, const t_pos endPos, LinkedStack *pStack)
+int findPath(t_pos currentPos, t_pos endPos, LinkedStack *pStack)
 {
 	t_pos pos;
 
-	g_map[currPos.y][currPos.x] = 2;
-	if (pushLS(pStack, currPos) == FALSE)
-		return (FALSE);
-	for (int i = 0; i < 4; ++i)
+	pushLS(pStack, currentPos);
+	MAZE[currentPos.y][currentPos.x] = VISITED;
+	for (int i = 0; i < 4; i++)
 	{
-		pos.x = currPos.x + dx[i];
-		pos.y = currPos.y + dy[i];
-		if (pos_in_map(pos))
+		pos.x = currentPos.x + direction[i][0];
+		pos.y = currentPos.y + direction[i][1];
+		if ((pos.x >= 0 && pos.x < HEIGHT) && (pos.y >= 0 && pos.y < WIDTH))
 		{
-			if (g_map[pos.y][pos.x] == 0)
+			if (MAZE[pos.y][pos.x] == EMPTY)
 			{
 				if (findPath(pos, endPos, pStack))
 					return (TRUE);
 			}
 		}
 	}
-	if (poscmp(currPos, endPos) == FALSE)
+	if (check(currentPos, endPos) == FALSE)
 	{
-		static int i = 0;
-		StackNode *pop;
-		pop = popLS(pStack);
-		printf("[%d] pop : [%d %d]\n", i, pop->data.x, pop->data.y);
-		++i;
+		free(popLS(pStack));
 		return (FALSE);
 	}
 	return (TRUE);
