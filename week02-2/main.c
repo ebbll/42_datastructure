@@ -1,6 +1,10 @@
 #include "linkedstack.h"
 #include <stdio.h>
 
+#define EMPTY 0
+#define WALL 1
+#define VISITED 2
+
 int MAZE[HEIGHT][WIDTH] = {
 	{0, 0, 1, 1, 1, 1 ,1 ,1},
 	{1, 0, 0, 0, 0, 0, 0, 1},
@@ -55,7 +59,7 @@ void displayAnswer(LinkedStack *pStack)
 	node = pStack->pTopElement->pLink;
 	while (node != NULL)
 	{
-		ANSWER[node->data.y][node->data.x] = 2;
+		ANSWER[node->data.y][node->data.x] = VISITED;
 		node = node->pLink;
 	}
 	printf("===MAP===\n");
@@ -64,11 +68,11 @@ void displayAnswer(LinkedStack *pStack)
 		for (int j = 0; j < 8; j++)
 		{
 			if (ANSWER[i][j] == 2)
-				printf("→");
+				printf("→ ");
 			else if (ANSWER[i][j] == 0)
-				printf(" ");
+				printf("  ");
 			else
-				printf("■");
+				printf("■ ");
 		}
 		printf("\n");
 	}

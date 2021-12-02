@@ -14,11 +14,6 @@ int direction[4][2] = {
 
 extern int MAZE[HEIGHT][WIDTH];
 
-int check(t_pos current, t_pos end)
-{
-	return (current.x == end.x && current.y == end.y);
-}
-
 int findPath(t_pos currentPos, t_pos endPos, LinkedStack *pStack)
 {
 	t_pos pos;
@@ -29,7 +24,7 @@ int findPath(t_pos currentPos, t_pos endPos, LinkedStack *pStack)
 	{
 		pos.x = currentPos.x + direction[i][0];
 		pos.y = currentPos.y + direction[i][1];
-		if ((pos.x >= 0 && pos.x < HEIGHT) && (pos.y >= 0 && pos.y < WIDTH))
+		if (pos.x >= 0 && pos.y >= 0 && pos.x < HEIGHT && pos.y < WIDTH)
 		{
 			if (MAZE[pos.y][pos.x] == EMPTY)
 			{
@@ -38,7 +33,7 @@ int findPath(t_pos currentPos, t_pos endPos, LinkedStack *pStack)
 			}
 		}
 	}
-	if (check(currentPos, endPos) == FALSE)
+	if (!(currentPos.x == endPos.x && currentPos.y == endPos.y))
 	{
 		free(popLS(pStack));
 		return (FALSE);
