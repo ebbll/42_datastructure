@@ -3,7 +3,6 @@
 ArrayStack* createArrayStack(int maxElementCount)
 {
 	ArrayStack *pStack;
-	ArrayStackNode *pElement;
 
 	if (maxElementCount <= 0)
 		return (NULL);
@@ -61,8 +60,6 @@ void deleteArrayStack(ArrayStack* pStack)
 
 int isArrayStackFull(ArrayStack* pStack)
 {
-	if (pStack == NULL)
-		return (FALSE);
 	if (pStack->currentElementCount == pStack->maxElementCount)
 		return (TRUE);
 	return (FALSE);
@@ -70,8 +67,6 @@ int isArrayStackFull(ArrayStack* pStack)
 
 int isArrayStackEmpty(ArrayStack* pStack)
 {
-	if (pStack == NULL)
-		return (FALSE);
 	if (pStack->currentElementCount == 0)
 		return (TRUE);
 	return (FALSE);
