@@ -59,20 +59,20 @@ void deleteArrayQueue(ArrayQueue* pQueue)
 int isArrayQueueFull(ArrayQueue* pQueue)
 {
 	if (!pQueue)
-		return (-1);
-	return (pQueue->currentElementCount == pQueue->maxElementCount);
+		return (ERROR);
+	return ((pQueue->currentElementCount == pQueue->maxElementCount) ? TRUE : FALSE);
 }
 
 int isArrayQueueEmpty(ArrayQueue* pQueue)
 {
 	if (!pQueue)
-		return (-1);
-	return (pQueue->currentElementCount == 0);
+		return (ERROR);
+	return ((pQueue->currentElementCount == 0) ? TRUE : FALSE);
 }
 
 void displayArrayQueue(ArrayQueue *pQueue)
 {
-	int end;
+	int start;
 
 	if (pQueue == NULL)
 	{
@@ -86,13 +86,13 @@ void displayArrayQueue(ArrayQueue *pQueue)
 	}
 	printf("=====QUEUE=====\n");
 	printf("Queue size : %d\n", pQueue->currentElementCount);
-	if (pQueue->front <= pQueue->rear)
-		end = pQueue->rear;
-	else
-		end = pQueue->rear + pQueue->maxElementCount;
-	for (int start = pQueue->front; start <= end; start++)
+	printf("FRONT : %d", pQueue->front);
+	printf("REAR : %d\n", pQueue->rear);
+	start = pQueue->front;
+	for (int i = 0; i < pQueue->currentElementCount; i++)
 	{
 		printf("[%d] : %c\n", start % pQueue->maxElementCount, pQueue->pElement[start % pQueue->maxElementCount].data);
+		start++;
 	}
 	printf("===============\n\n");
 }
