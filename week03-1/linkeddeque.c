@@ -7,6 +7,8 @@ LinkedDeque* createLinkedDeque()
 	LinkedDeque *pDeque;
 
 	pDeque = (LinkedDeque *)malloc(sizeof(LinkedDeque));
+	if (!pDeque)
+		return (NULL);
 	pDeque->currentElementCount = 0;
 	pDeque->pFrontNode = NULL;
 	pDeque->pRearNode = NULL;
@@ -17,6 +19,8 @@ int insertFrontLD(LinkedDeque* pDeque, DequeNode element)
 {
 	DequeNode *node;
 
+	if (!pDeque)
+		return (FALSE);
 	node = (DequeNode *)malloc(sizeof(DequeNode));
 	if (!node)
 		return (FALSE);
@@ -40,6 +44,8 @@ int insertRearLD(LinkedDeque* pDeque, DequeNode element)
 {
 	DequeNode *node;
 
+	if (!pDeque)
+		return (FALSE);
 	node = (DequeNode *)malloc(sizeof(DequeNode));
 	if (!node)
 		return (FALSE);
@@ -63,6 +69,8 @@ DequeNode* deleteFrontLD(LinkedDeque* pDeque)
 {
 	DequeNode *ret;
 
+	if (!pDeque)
+		return (FALSE);
 	if (isLinkedDequeEmpty(pDeque))
 		return (NULL);
 	ret = pDeque->pFrontNode;
@@ -83,6 +91,8 @@ DequeNode* deleteRearLD(LinkedDeque* pDeque)
 {
 	DequeNode *ret;
 
+	if (!pDeque)
+		return (FALSE);
 	if (isLinkedDequeEmpty(pDeque))
 		return (NULL);
 	ret = pDeque->pRearNode;
@@ -101,20 +111,22 @@ DequeNode* deleteRearLD(LinkedDeque* pDeque)
 
 DequeNode* peekFrontLD(LinkedDeque* pDeque)
 {
-	if (isLinkedDequeEmpty(pDeque))
+	if (!pDeque || isLinkedDequeEmpty(pDeque))
 		return (NULL);
 	return (pDeque->pFrontNode);
 }
 
 DequeNode* peekRearLD(LinkedDeque* pDeque)
 {
-	if (isLinkedDequeEmpty(pDeque))
+	if (!pDeque || isLinkedDequeEmpty(pDeque))
 		return (NULL);
 	return (pDeque->pRearNode);
 }
 
 void deleteLinkedDeque(LinkedDeque* pDeque)
 {
+	if (!pDeque)
+		return ;
 	while (pDeque->pFrontNode)
 	{
 		free(deleteFrontLD(pDeque));
