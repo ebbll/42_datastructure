@@ -9,10 +9,10 @@ ArrayQueue* createArrayQueue(int maxElementCount)
 	if (maxElementCount <= 0)
 		return (NULL);
 	pQueue = (ArrayQueue *)malloc(sizeof(ArrayQueue));
-	if (pQueue == NULL)
+	if (!pQueue)
 		return (NULL);
 	pQueue->pElement = (ArrayQueueNode *)malloc(sizeof(ArrayQueueNode) * maxElementCount);
-	if (pQueue->pElement == NULL)
+	if (!pQueue->pElement)
 	{
 		free(pQueue);
 		return (NULL);

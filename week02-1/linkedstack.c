@@ -136,6 +136,7 @@ int main(void)
 	free(temp);
 	temp = peekLS(pStack);
 	printf("peek : %d\n", (int)temp->data);
+	free(temp);
 	displayLinkedStack(pStack);
 
 	popLS(pStack);
