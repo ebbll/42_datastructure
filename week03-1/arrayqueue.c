@@ -36,11 +36,14 @@ int enqueueAQ(ArrayQueue* pQueue, ArrayQueueNode element)
 
 ArrayQueueNode *dequeueAQ(ArrayQueue* pQueue)
 {
+	int ret;
+
+	ret = pQueue->front;
 	if (!pQueue || isArrayQueueEmpty(pQueue))
 		return (NULL);
 	pQueue->front = (pQueue->front + 1) % pQueue->maxElementCount;
 	pQueue->currentElementCount--;
-	return (&(pQueue->pElement[pQueue->front - 1]));
+	return (&(pQueue->pElement[ret]));
 }
 
 ArrayQueueNode *peekAQ(ArrayQueue* pQueue)
