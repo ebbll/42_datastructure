@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// deque : double-ended queue
+// insert 와 delete가 양 끝에서 일어남
+// 보편적으로 더블 링크드 리스트로 구현됨
+// 더블 링크드 리스트로 구현된 덱은 삽입/제거 연산의 시간 복잡도가 O(1)과 같음
+
 LinkedDeque* createLinkedDeque()
 {
 	LinkedDeque *pDeque;
