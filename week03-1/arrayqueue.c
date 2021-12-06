@@ -55,6 +55,8 @@ ArrayQueueNode *peekAQ(ArrayQueue* pQueue)
 
 void deleteArrayQueue(ArrayQueue* pQueue)
 {
+	if (!pQueue)
+		return ;
 	free(pQueue->pElement);
 	free(pQueue);
 }
@@ -77,7 +79,7 @@ void displayArrayQueue(ArrayQueue *pQueue)
 {
 	int start;
 
-	if (pQueue == NULL)
+	if (!pQueue)
 	{
 		printf("Queue pointer doesn't exist\n\n");
 		return ;
