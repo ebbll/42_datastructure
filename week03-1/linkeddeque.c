@@ -32,11 +32,11 @@ int insertFrontLD(LinkedDeque* pDeque, DequeNode element)
 	node->data = element.data;
 	node->pLLink = NULL;
 	node->pRLink = pDeque->pFrontNode;
-	if (pDeque->pFrontNode)
+	if (pDeque->pFrontNode) // 기존에 노드가 존재할 경우
 	{
 		pDeque->pFrontNode->pLLink = node;
 	}
-	else
+	else // 노드가 없는 경우
 	{
 		pDeque->pRearNode = node;
 	}
@@ -79,11 +79,11 @@ DequeNode* deleteFrontLD(LinkedDeque* pDeque)
 	if (isLinkedDequeEmpty(pDeque))
 		return (NULL);
 	ret = pDeque->pFrontNode;
-	if (pDeque->pFrontNode->pRLink)
+	if (pDeque->pFrontNode->pRLink) // 노드가 남아있는 경우
 	{
 		pDeque->pFrontNode->pRLink->pLLink = NULL;
 	}
-	else
+	else // 남은 노드가 없는 경우
 	{
 		pDeque->pRearNode = NULL;
 	}
@@ -211,6 +211,7 @@ int main(void)
 	pDeque = createLinkedDeque();
 	printf("EMPTY? : %d\n\n", isLinkedDequeEmpty(pDeque));
 
+	// BACD
 	new.data = 'A';
 	insertFrontLD(pDeque, new);
 	new.data = 'B';
@@ -231,8 +232,12 @@ int main(void)
 	displayLinkedDeque(pDeque);
 	displayReverseLinkedDeque(pDeque);
 
-	deleteFrontLD(pDeque);
-	deleteFrontLD(pDeque);
+	temp = deleteFrontLD(pDeque);
+	printf("Delete front : %c\n", (char)temp->data);
+	free(temp);
+	temp = deleteFrontLD(pDeque);
+	printf("Delete front : %c\n\n", (char)temp->data);
+	free(temp);
 	displayLinkedDeque(pDeque);
 	displayReverseLinkedDeque(pDeque);
 
