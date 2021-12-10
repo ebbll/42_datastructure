@@ -1,11 +1,13 @@
 #ifndef _BIN_TREE_
 #define _BIN_TREE_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct BinTreeNodeType
 {
 	char data;
 	int visited;
-
 	struct BinTreeNodeType* pLeftChild;
 	struct BinTreeNodeType* pRightChild;
 } BinTreeNode;
