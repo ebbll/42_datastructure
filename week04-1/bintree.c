@@ -165,14 +165,16 @@ int main(void)
 	new.data = 'M';
 	insertRightChildNodeBT(pBinTree->pRootNode->pRightChild->pRightChild, new);
 
+	printf("PREORDER\n");
 	preorderTraversalBinTree(pBinTree->pRootNode);
 	printf("\n");
 
+	printf("INORDER\n");
 	inorderTraversalBinTree(pBinTree->pRootNode);
 	printf("\n");
 
+	printf("POSTORDER\n");
 	postorderTraversalBinTree(pBinTree->pRootNode);
-	printf("\n");
 
 	deleteBinTree(pBinTree);
 }
