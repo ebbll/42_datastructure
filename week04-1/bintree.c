@@ -177,4 +177,6 @@ int main(void)
 	postorderTraversalBinTree(pBinTree->pRootNode);
 
 	deleteBinTree(pBinTree);
+
+	return (0);
 }
