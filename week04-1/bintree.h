@@ -25,6 +25,9 @@ BinTreeNode* getLeftChildNodeBT(BinTreeNode* pNode);
 BinTreeNode* getRightChildNodeBT(BinTreeNode* pNode);
 void deleteBinTree(BinTree* pBinTree);
 void deleteBinTreeNode(BinTreeNode* pNode);
+void preorderTraversalBinTree(BinTreeNode *pNode);
+void inorderTraversalBinTree(BinTreeNode *pNode);
+void postorderTraversalBinTree(BinTreeNode *pNode);
 
 #endif
 
