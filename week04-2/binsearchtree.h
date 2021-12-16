@@ -2,6 +2,7 @@
 #define _BIN_SEARCH_TREE_
 
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct BinSearchTreeNodeType
 {
@@ -17,16 +18,18 @@ typedef struct BinSearchTreeType
 	BinSearchTreeNode *pRootNode;
 } BinSearchTree;
 
-BinSearchTree* createBinSearchTree();
-int insertElementBST(BinSearchTree* pBinSearchTree, BinSearchTreeNode element);
-int deleteElementBST(BinSearchTree* pBinSearchTree, int key);
+BinSearchTree *createBinSearchTree();
+BinSearchTreeNode *insertElementBST(BinSearchTreeNode* pNode, BinSearchTreeNode element);
+BinSearchTreeNode *deleteElementBST(BinSearchTreeNode* pRoot, int key);
 
-BinSearchTreeNode* searchRecursiveBST(BinSearchTree* pBinSearchTree, int key);
-BinSearchTreeNode* searchInternalRecursiveBST(BinSearchTreeNode* pTreeNode, int key);
-BinSearchTreeNode* searchBST(BinSearchTree* pBinSearchTree, int key);
+BinSearchTreeNode *searchRecursiveBST(BinSearchTree *pBinSearchTree, int key);
+BinSearchTreeNode *searchInternalRecursiveBST(BinSearchTreeNode *pTreeNode, int key);
+BinSearchTreeNode *searchBST(BinSearchTreeNode *pRoot, int key);
 
-void deleteBinSearchTree(BinSearchTree* pBinSearchTree);
-void deleteBinSearchTreeInternal(BinSearchTreeNode* pTreeNode);
+void inorderTraversalBST(BinSearchTreeNode *pNode);
+
+void deleteBinSearchTreeNode(BinSearchTreeNode *pRoot);
+void deleteBinSearchTree(BinSearchTree *pBinSearchTree);
 
 #endif
 
