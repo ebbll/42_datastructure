@@ -5,6 +5,12 @@
 // 2. root의 key는 왼쪽 서브트리의 어떠한 key보다도 크다
 // 3. root의 key는 오른쪽 서브트리의 어떠한 key보다도 작다
 // 4. 왼쪽과 오른쪽 서브트리도 이진 탐색 트리이다
+
+// search, insert, delete의 시간복잡도
+// General Case : O(height)
+// Worst Case : O(n) (트리의 꼴이 리니어, 즉 링크드 리스트와 같은 경우)
+// Best Case : O(log n) (포화 이진 트리일 경우 height는 log2 n이 됨0
+
 BinSearchTree* createBinSearchTree(BinSearchTreeNode element)
 {
 	BinSearchTree *pBinSearchTree;
