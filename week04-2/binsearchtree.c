@@ -1,15 +1,19 @@
 #include "binsearchtree.h"
 
 // 이진 탐색 트리의 조건
-// 1. key는 유일한 값이다
-// 2. root의 key는 왼쪽 서브트리의 어떠한 key보다도 크다
-// 3. root의 key는 오른쪽 서브트리의 어떠한 key보다도 작다
-// 4. 왼쪽과 오른쪽 서브트리도 이진 탐색 트리이다
+// 1. key는 유일한 값이다.
+// 2. root의 key는 왼쪽 서브트리의 어떠한 key보다도 크다.
+// 3. root의 key는 오른쪽 서브트리의 어떠한 key보다도 작다.
+// 4. 왼쪽과 오른쪽 서브트리도 이진 탐색 트리이다.
+
+// 특징
+// 삽입이 leaf 노드에서만 일어남
+// 자료의 검색에 유리한 자료구조
 
 // search, insert, delete의 시간복잡도
-// General Case : O(height)
-// Worst Case : O(n) (트리의 꼴이 리니어, 즉 링크드 리스트와 같은 경우)
-// Best Case : O(log n) (포화 이진 트리일 경우 height는 log2 n이 됨0
+// General Case : O(h)
+// Worst Case : O(n) (트리의 꼴이 linear인 경우 height는 n이 됨)
+// Best Case : O(log n) (완전 이진 트리일 경우 height는 log n이 됨
 
 BinSearchTree* createBinSearchTree(BinSearchTreeNode element)
 {
@@ -47,15 +51,17 @@ BinSearchTreeNode *createNode(BinSearchTreeNode element)
 
 BinSearchTreeNode *insertElementBST(BinSearchTreeNode* pRoot, BinSearchTreeNode element)
 {
-	//빈 자리를 찾으면 노드 생성
+	// 빈 자리를 찾으면 노드 생성
 	if (!pRoot)
 		return (createNode(element));
 
+	// 자리 찾아가기
 	if (element.key < pRoot->key)
 		pRoot->pLeftChild = insertElementBST(pRoot->pLeftChild, element);
 	else if (element.key > pRoot->key)
 		pRoot->pRightChild = insertElementBST(pRoot->pRightChild, element);
-	//같은 값을 가진 경우 삽입하지 않음
+
+	// 같은 값을 가진 경우 삽입하지 않음
 	return (pRoot);
 }
 
@@ -87,7 +93,7 @@ BinSearchTreeNode *deleteElementBST(BinSearchTreeNode* pRoot, int key)
 	{
 		BinSearchTreeNode *temp;
 
-		// 노드의 child가 없거나 하나일 때
+		// 노드의 child가 없거나 하나인 경우
 		if (pRoot->pLeftChild == NULL)
 		{
 			temp = pRoot->pRightChild;
@@ -101,11 +107,12 @@ BinSearchTreeNode *deleteElementBST(BinSearchTreeNode* pRoot, int key)
 			return (temp);
 		}
 		// 노드에 자식이 둘 있는 경우
-		// 오른쪽 서브트리에서 successor 노드를 찾는다.
+		// 오른쪽 서브트리에서 successor 노드를 찾음
 		temp = getMinKeyNode(pRoot->pRightChild);
-		// successor 노드 키와 삭제할 노드 키를 바꾼다.
+		// successor 노드의 값으로 삭제할 노드의 값을 덮어씀
 		pRoot->key = temp->key;
-		// 노드를 삭제한다.
+		pRoot->value = pRoot->value;
+		// 노드를 삭제함
 		pRoot->pRightChild = deleteElementBST(pRoot->pRightChild, temp->key);
 	}
 	return (pRoot);
@@ -145,7 +152,7 @@ void inorderTraversalBST(BinSearchTreeNode *pNode)
 	if (!pNode)
 		return ;
 	inorderTraversalBST(pNode->pLeftChild);
-	printf("%d\n", pNode->key);
+	printf("%d ", pNode->key);
 	inorderTraversalBST(pNode->pRightChild);
 }
 
@@ -171,6 +178,7 @@ int main(void)
 {
 	BinSearchTree *pBinSearchTree;
 	BinSearchTreeNode new;
+
 	new.value = 0;
 
 	new.key = 30;
@@ -216,6 +224,11 @@ int main(void)
 		printf("DOES NOT EXIST\n\n");
 	
 	printf("=====INORDER=====\n");
+	inorderTraversalBST(pBinSearchTree->pRootNode);
+	printf("\n\n");
+
+	printf("=====DELETE=====\n");
+	deleteElementBST(pBinSearchTree->pRootNode, 30);
 	inorderTraversalBST(pBinSearchTree->pRootNode);
 
 	deleteBinSearchTree(pBinSearchTree);

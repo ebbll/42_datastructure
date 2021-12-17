@@ -22,8 +22,8 @@ BinSearchTree *createBinSearchTree();
 BinSearchTreeNode *insertElementBST(BinSearchTreeNode* pNode, BinSearchTreeNode element);
 BinSearchTreeNode *deleteElementBST(BinSearchTreeNode* pRoot, int key);
 
-BinSearchTreeNode *searchRecursiveBST(BinSearchTree *pBinSearchTree, int key);
-BinSearchTreeNode *searchInternalRecursiveBST(BinSearchTreeNode *pTreeNode, int key);
+//BinSearchTreeNode *searchRecursiveBST(BinSearchTree *pBinSearchTree, int key);
+//BinSearchTreeNode *searchInternalRecursiveBST(BinSearchTreeNode *pTreeNode, int key);
 BinSearchTreeNode *searchBST(BinSearchTreeNode *pRoot, int key);
 
 void inorderTraversalBST(BinSearchTreeNode *pNode);
