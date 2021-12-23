@@ -7,7 +7,7 @@ typedef struct ArrayGraphType
 {
 	int maxVertexCount;
 	int currentVertexCount;
-	int graphType;
+	int graphType; // 1 undirected / 2 directed
 	int **ppAdjEdge;
 	int *pVertex;
 } ArrayGraph;
